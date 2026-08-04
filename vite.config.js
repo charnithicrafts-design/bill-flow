@@ -9,5 +9,9 @@ export default defineConfig({
     rollupOptions: {
       external: ['electron', 'better-sqlite3']
     }
+  },
+  test: {
+    environment: 'jsdom',
+    globals: true,
   }
 });
