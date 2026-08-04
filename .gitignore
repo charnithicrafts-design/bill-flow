@@ -1,0 +1,8 @@
+node_modules
+dist
+.env
+billflow.db
+billflow.db-wal
+billflow.db-shm
+*.log
+.DS_Store
