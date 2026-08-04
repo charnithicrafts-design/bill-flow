@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import OnboardingWizard from './components/OnboardingWizard';
 import TextileBillingCounter from './components/domains/TextileBillingCounter';
 // import GeneralBillingCounter from './components/domains/GeneralBillingCounter';
-// import AgriBillingCounter from './components/domains/AgriBillingCounter';
+import AgriBillingCounter from './components/domains/AgriBillingCounter';
 
 export default function App() {
   const [activeDomain, setActiveDomain] = useState(null);
@@ -39,8 +39,7 @@ export default function App() {
     // CounterComponent = GeneralBillingCounter; // To be built
     CounterComponent = () => <div className="p-8 text-white">General Retail Module - Under Construction</div>;
   } else if (activeDomain === 'AGRI') {
-    // CounterComponent = AgriBillingCounter; // To be built
-    CounterComponent = () => <div className="p-8 text-white">Agri/Mandi Module - Under Construction</div>;
+    CounterComponent = AgriBillingCounter;
   }
 
   return (
