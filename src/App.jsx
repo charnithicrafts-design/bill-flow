@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import OnboardingWizard from './components/OnboardingWizard';
 import TextileBillingCounter from './components/domains/TextileBillingCounter';
-// import GeneralBillingCounter from './components/domains/GeneralBillingCounter';
+import GeneralBillingCounter from './components/domains/GeneralBillingCounter';
 import AgriBillingCounter from './components/domains/AgriBillingCounter';
 
 export default function App() {
@@ -36,8 +36,7 @@ export default function App() {
   if (activeDomain === 'TEXTILE') {
     CounterComponent = TextileBillingCounter;
   } else if (activeDomain === 'GENERAL') {
-    // CounterComponent = GeneralBillingCounter; // To be built
-    CounterComponent = () => <div className="p-8 text-white">General Retail Module - Under Construction</div>;
+    CounterComponent = GeneralBillingCounter;
   } else if (activeDomain === 'AGRI') {
     CounterComponent = AgriBillingCounter;
   }
