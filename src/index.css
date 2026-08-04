@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #0A0A0F;
+    color: white;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+/* Custom Scrollbar for Dark Theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111118;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4B5563;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6B7280;
+}
+
+/* Print Media Query */
+@media print {
+  @page {
+    margin: 0;
+    size: 80mm auto;
+  }
+  body * {
+    visibility: hidden;
+  }
+  #print-section, #print-section * {
+    visibility: visible;
+  }
+  #print-section {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
+/* Animations */
+@keyframes glow-pulse {
+  0% { box-shadow: 0 0 12px rgba(245,158,11,0.2); }
+  50% { box-shadow: 0 0 16px rgba(245,158,11,0.5); }
+  100% { box-shadow: 0 0 12px rgba(245,158,11,0.2); }
+}
+
+.focus-glow:focus {
+  animation: glow-pulse 2s infinite;
+}
+
+@keyframes text-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-text-pulse {
+  animation: text-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
