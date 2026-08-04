@@ -1,0 +1,35 @@
+-- GENERAL RETAIL DOMAIN SCHEMA
+-- Product SKUs table (standard items)
+CREATE TABLE IF NOT EXISTS product_skus (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    product_id INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+    sku_code TEXT NOT NULL UNIQUE,
+    barcode TEXT,
+    unit_price REAL NOT NULL,
+    stock_quantity INTEGER NOT NULL DEFAULT 0,
+    reorder_level INTEGER NOT NULL DEFAULT 5,
+    is_active INTEGER DEFAULT 1,
+    created_at TEXT DEFAULT (datetime('now')),
+    updated_at TEXT DEFAULT (datetime('now'))
+);
+
+-- Invoice items table (general specifics)
+CREATE TABLE IF NOT EXISTS invoice_items (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    invoice_id TEXT NOT NULL REFERENCES invoices(id) ON DELETE CASCADE,
+    sku_id INTEGER NOT NULL REFERENCES product_skus(id),
+    sku_code TEXT NOT NULL,
+    product_name TEXT NOT NULL,
+    hsn_code TEXT NOT NULL,
+    quantity INTEGER NOT NULL,
+    unit_price REAL NOT NULL,
+    tax_rate REAL NOT NULL,
+    tax_amount REAL NOT NULL,
+    line_total REAL NOT NULL
+);
+
+-- Indices
+CREATE INDEX IF NOT EXISTS idx_skus_product_id ON product_skus(product_id);
+CREATE INDEX IF NOT EXISTS idx_skus_sku_code ON product_skus(sku_code);
+CREATE INDEX IF NOT EXISTS idx_skus_stock ON product_skus(product_id, stock_quantity);
+CREATE INDEX IF NOT EXISTS idx_invoice_items_invoice ON invoice_items(invoice_id);
