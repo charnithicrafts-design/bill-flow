@@ -61,8 +61,17 @@ describe('TextileBillingCounter Keyboard Workflow', () => {
     await user.type(barcodeInput, '123456{Enter}');
     
     // Wait for the mock fetch to resolve and state to update
+    // Wait for the mock fetch to resolve and state to update (pendingItem appears)
     await waitFor(() => {
       expect(screen.getByText('Test Saree')).toBeDefined();
+    });
+
+    // Now hit enter on the quantity input to add it to the cart
+    const qtyInput = screen.getByDisplayValue('1');
+    await user.type(qtyInput, '{Enter}');
+
+    // Now it should be in the line items table (Red color will be displayed)
+    await waitFor(() => {
       expect(screen.getByText('Red')).toBeDefined();
     });
   });
@@ -82,8 +91,13 @@ describe('TextileBillingCounter Keyboard Workflow', () => {
     await user.type(barcodeInput, '123456{Enter}');
     
     await waitFor(() => {
-      // If IGST is active, it should render IGST specific UI or calculate it
-      // Based on our implementation, it changes the label
+      expect(screen.getByText('Test Saree')).toBeDefined();
+    });
+
+    const qtyInput = screen.getByDisplayValue('1');
+    await user.type(qtyInput, '{Enter}');
+    
+    await waitFor(() => {
       expect(screen.getByText(/IGST/)).toBeDefined();
     });
   });
